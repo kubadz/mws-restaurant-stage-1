@@ -19,15 +19,19 @@ initMap = () => {
       self.newMap = L.map('map', {
         center: [restaurant.latlng.lat, restaurant.latlng.lng],
         zoom: 16,
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        zoomControl: false,
+        attributionControl: false
       });
+      L.control.zoom({ position: 'bottomleft' }).addTo(newMap);
+      L.control.attribution({ position: 'topright' }).addTo(newMap);
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
         mapboxToken: 'pk.eyJ1IjoicG9zcG9saXR5IiwiYSI6ImNqazdjamR5YTIyM3kzcW1xeW12aWt4MXcifQ.1ywOOYqibh5z_t8eHdQvQA',
         maxZoom: 18,
+        id: 'mapbox.streets',
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
           '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox.streets'
+          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
       }).addTo(newMap);
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
@@ -132,21 +136,35 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
+  li.classList.add('review')
+
+  const reviewMeta = document.createElement('div');
+  reviewMeta.classList.add('review-meta');
+  li.appendChild(reviewMeta);
+
   const name = document.createElement('p');
   name.innerHTML = review.name;
-  li.appendChild(name);
+  name.classList.add('review-reviewer');
+  reviewMeta.appendChild(name);
 
   const date = document.createElement('p');
   date.innerHTML = review.date;
-  li.appendChild(date);
+  date.classList.add('review-date');
+  reviewMeta.appendChild(date);
+
+  const reviewData = document.createElement('div');
+  reviewData.classList.add('review-data');
+  li.appendChild(reviewData);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
+  rating.classList.add('review-rating');
+  reviewData.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
-  li.appendChild(comments);
+  comments.classList.add('review-comment');
+  reviewData.appendChild(comments);
 
   return li;
 }
@@ -176,3 +194,12 @@ getParameterByName = (name, url) => {
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+/**
+ * Listen for viewport changes to trigger map reload when it have to be done.
+ */
+var mobileViewport = window.matchMedia("screen and (min-width: 1200px)");
+mobileViewport.addListener(function() {
+  newMap.invalidateSize(false);
+  console.log(`map reloaded. Size: ${newMap.getSize()}`);
+});
