@@ -342,6 +342,8 @@ nav h1 a {
   /* width: 100%; */
   /*  display: flex;
   flex-wrap: wrap; */
+  max-width: 800px;
+  margin: auto;
 }
 
 #reviews-container {
