@@ -186,5 +186,8 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     }
     self.markers.push(marker);
   });
-
+  const markers = document.querySelectorAll(".leaflet-marker-icon");
+  console.log(markers);
+  for (let marker of markers)
+    marker.tabIndex = -1;
 }

@@ -18,6 +18,22 @@ body {
   width: 100%;
 }
 
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 0;
+  background: rgb(56, 56, 56);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  border-bottom-right-radius: 8px;
+  font-size: 20pt;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 ul,
 li {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
@@ -151,7 +167,12 @@ nav h1 a {
 
 /* ====================== Map ====================== */
 
+#map:focus {
+  border: 3px black dotted;
+}
+
 #map {
+  box-sizing: border-box;
   height: 400px;
   width: 100%;
   background-color: #ccc;
