@@ -213,7 +213,7 @@ nav h1 a {
   background-color: #f3f3f3;
   list-style: outside none none;
   margin: 0;
-  padding: 30px 15px 60px;
+  padding: 30px 3.5vw 60px;
   text-align: center;
   display: grid;
   grid-template-columns: 1fr;
@@ -222,7 +222,7 @@ nav h1 a {
 #restaurants-list li {
   background-color: #fff;
   font-family: Arial, sans-serif;
-  margin: 15px;
+  margin: 2.5vw;
   padding: 0 0 25px;
   text-align: left;
   border-top-left-radius: 1rem;
@@ -230,7 +230,7 @@ nav h1 a {
   box-shadow: 2px 1px 15px #25283148;
 }
 
-#restaurants-list li :not(.restaurant-img) {
+#restaurants-list li :not(.restaurant-img):not(picture):not(source) {
   margin-left: 5%;
   margin-right: 5%;
 }
@@ -360,11 +360,6 @@ nav h1 a {
   border-top: 1px solid #fff;
   padding: 0 10%;
   display: grid;
-  /* width: 100%; */
-  /*  display: flex;
-  flex-wrap: wrap; */
-  max-width: 800px;
-  margin: auto;
 }
 
 #reviews-container {
@@ -457,6 +452,9 @@ nav h1 a {
   #restaurants-list {
     grid-template-columns: 1fr 1fr;
   }
+  #restaurants-list li {
+    margin: 2vw;
+  }
 }
 
 @media screen and (min-width: 720px) {
@@ -498,6 +496,9 @@ nav h1 a {
     padding-left: calc((100% - 1200px) / 2);
     padding-right: calc((100% - 1200px) / 2);
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  #restaurants-list li {
+    margin: 1.5vw;
   }
   .inside #footer {
     position: fixed;

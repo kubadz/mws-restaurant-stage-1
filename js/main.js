@@ -146,11 +146,20 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
+  const picture = document.createElement('picture');
+  li.append(picture);
+
+  const source = document.createElement('source');
+  source.sizes = '(min-width: 1200px) calc(400px - 3vw), (min-width: 600px) 42.5vw, (max-width: 599px) 88vw';
+  const restaurantImageName = DBHelper.imageNameForRestaurant(restaurant)
+  source.srcset = `/img/260/${restaurantImageName} 260w, /img/520/${restaurantImageName} 520w, /img/800/${restaurantImageName} 800w`
+  picture.append(source);
+
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   image.alt = "thumbnail showing restaurant"
-  li.append(image);
+  picture.append(image);
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
@@ -165,6 +174,8 @@ createRestaurantHTML = (restaurant) => {
   li.append(address);
 
   const more = document.createElement('a');
+  more.setAttribute("role", "button");
+  more.setAttribute("aria-label", restaurant.name + " restaurant. View Details");
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
@@ -187,7 +198,6 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
   const markers = document.querySelectorAll(".leaflet-marker-icon");
-  console.log(markers);
   for (let marker of markers)
     marker.tabIndex = -1;
 }

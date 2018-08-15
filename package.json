@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "mws-udacity-project-1",
   "scripts": {
-    "optimize": "echo \"available soon\" && exit 1"
+    "optimize": "node image-opt.js"
   },
   "repository": {
     "type": "git",
@@ -12,5 +12,8 @@
   "bugs": {
     "url": "https://github.com/kubadz/mws-restaurant-stage-1/issues"
   },
-  "homepage": "https://github.com/kubadz/mws-restaurant-stage-1#readme"
+  "homepage": "https://github.com/kubadz/mws-restaurant-stage-1#readme",
+  "dependencies": {
+    "sharp": "^0.20.5"
+  }
 }
