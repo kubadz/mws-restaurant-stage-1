@@ -153,7 +153,7 @@ createRestaurantHTML = (restaurant) => {
   const source = document.createElement('source');
   source.sizes = '(min-width: 1200px) calc(400px - 3vw), (min-width: 600px) 42.5vw, (max-width: 599px) 88vw';
   const restaurantImageName = DBHelper.imageNameForRestaurant(restaurant)
-  source.srcset = `/img/260/${restaurantImageName} 260w, /img/520/${restaurantImageName} 520w, /img/800/${restaurantImageName} 800w`
+  source.srcset = `img/260/${restaurantImageName} 260w, img/520/${restaurantImageName} 520w, img/800/${restaurantImageName} 800w`
   picture.append(source);
 
   const image = document.createElement('img');

@@ -4,13 +4,13 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(currentCacheName)
     .then(cache => cache.addAll([
-      '/',
-      '/js/dbhelper.js',
-      '/js/main.js',
-      '/js/restaurant_info.js',
-      '/css/styles.css',
-      '/index.html',
-      '/restaurant.html'
+      './',
+      './js/dbhelper.js',
+      './js/main.js',
+      './js/restaurant_info.js',
+      './css/styles.css',
+      './index.html',
+      './restaurant.html'
     ]))
   );
 });

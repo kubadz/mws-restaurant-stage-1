@@ -77,7 +77,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const source = document.querySelector('#restaurant-visual-container source')
   source.sizes = '(min-width: 1200px) calc(50vw - 20%), (min-width: 1020px) calc((((80% - 40px) / 3) * 2) + 20px), (min-width: 720px) calc((80% - 20px) / 2), (max-width: 719px) 80%';
   const restaurantImageName = DBHelper.imageNameForRestaurant(restaurant)
-  source.srcset = `/img/260/${restaurantImageName} 260w, /img/520/${restaurantImageName} 520w, /img/800/${restaurantImageName} 800w`
+  source.srcset = `img/260/${restaurantImageName} 260w, img/520/${restaurantImageName} 520w, img/800/${restaurantImageName} 800w`
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
