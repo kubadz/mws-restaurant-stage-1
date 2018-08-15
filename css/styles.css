@@ -173,7 +173,7 @@ nav h1 a {
 
 #map {
   box-sizing: border-box;
-  height: 400px;
+  height: 50vh;
   width: 100%;
   background-color: #ccc;
 }
@@ -296,7 +296,7 @@ nav h1 a {
 
 .inside #map-container {
   background: blue none repeat scroll 0 0;
-  height: 400px;
+  height: 50vh;
   width: 100%;
 }
 
