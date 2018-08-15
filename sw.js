@@ -1,4 +1,4 @@
-currentCacheName = 'restaurant-reviews-app-v1'
+currentCacheName = 'restaurant-reviews-app-v2'
 
 self.addEventListener('install', event => {
   event.waitUntil(
