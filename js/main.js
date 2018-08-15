@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   initMap(); // added 
   fetchNeighborhoods();
   fetchCuisines();
+  registerServiceWorker();
 });
 
 /**
@@ -200,4 +201,44 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   const markers = document.querySelectorAll(".leaflet-marker-icon");
   for (let marker of markers)
     marker.tabIndex = -1;
+}
+
+/**
+ * Register the service worker
+ */
+registerServiceWorker = () => {
+  if (!navigator.serviceWorker) return;
+  navigator.serviceWorker.register('sw.js', {
+    scope: "/"
+  }).then(reg => {
+    console.log("SW registration worked!");
+    if (reg.waiting) {
+      console.log("SW waiting.");
+      reg.waiting.postMessage({ action: 'skipWaiting' });
+    }
+    if (reg.installing) {
+      reg.installing.addEventListener('statechange', function() {
+        // reloads page after installation of sw is completed and sw is activated to cache all assets not cached in installation process
+        if (this.state === 'activated') {
+          window.location.reload();
+        }
+      });
+    }
+    reg.addEventListener('updatefound', function() {
+      reg.installing.addEventListener('statechange', function() {
+        if (this.state == 'installed') {
+          this.postMessage({ action: 'skipWaiting' });
+        }
+      });
+    });
+  }).catch(err => {
+    console.log("registration failed! error: " + err);
+  });
+
+  var refreshing;
+  navigator.serviceWorker.addEventListener('controllerchange', function() {
+    if (refreshing) return;
+    window.location.reload();
+    refreshing = true;
+  });
 }
